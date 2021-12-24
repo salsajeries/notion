@@ -35,24 +35,21 @@ body {
   </body>
 
   <script>
-      function timedRefresh(timeoutPeriod) {
-        setTimeout("location.reload(true);",timeoutPeriod);
-      }
-
-      //window.onload = timedRefresh(2000);
+      function currentTime() {
 
       var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
       var today = new Date();
       var hrs = today.getHours();
       var min = today.getMinutes();
+      var sec = today.getSeconds();
       var dayOfWeek = weekday[today.getDay()];
       var date = dayOfWeek + ", " + (today.getMonth()+1) + " / " + today.getDate() +' / '+today.getFullYear()  ;
-
-
+      
       var greet;
       var tod = 'PM';    // Time of day AM/PM
 
+      // Determine message
       if (hrs < 12)
       {
         greet = 'Good Morning';
@@ -63,21 +60,29 @@ body {
       else if (hrs >= 17 && hrs <= 24)
         greet = 'Good Evening';
       
+      // Convert to 12 hour format
       if (hrs > 12)
         hrs -= 12;
       else if (hrs === 0)
         hrs = 12;
       
+      // Add "0" for minutes less than 10
       if (min < 10)
         min = '0' + min.toString();
 
+      // Time as a string
       var time = hrs.toString() + ':' + min.toString();
 
+      // Display date and time
       document.getElementById("greeting").innerHTML = greet;
       document.getElementById("time").innerHTML = time + ' ' + tod;
-
       document.getElementById("date").innerHTML = date;
 
+      return sec;
+    }
+
+    var initialSec = currentTime();
+    setTimeout(setInterval(currentTime, 1000), (60 - initialSec));
   </script> 
 
 </html>
