@@ -1,2 +1,2 @@
 # notion
-https://salsajeries.github.io/notion/
+https://salsajeries.github.io/clockwidget-notion/
